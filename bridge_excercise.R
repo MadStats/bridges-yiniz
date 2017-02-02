@@ -1,7 +1,4 @@
-library(plyr)
-library(choroplethr)
-library(dplyr)
-library(readr)
+
 library(data.table)
 getwd()
 #read the bridge file 2015 data
@@ -13,3 +10,9 @@ View(inData)
 
 #a simple way to subset data (select variables)
 outData=data.frame(structureNo=inData$STRUCTURE_NUMBER_008, year=inData$YEAR_BUILT_027, fips = inData$COUNTY_CODE_003, condition = inData$SUPERSTRUCTURE_COND_059, cost = inData$BRIDGE_IMP_COST_094)
+
+#another way to read data through url
+library(RCurl)
+myfile <- getURL('https://www.fhwa.dot.gov/bridge/nbi/2016/delimited/CO16.txt', ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)
+mydat <- read.csv(textConnection(myfile), header=T)
+head(mydat)
